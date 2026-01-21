@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://eu7v3v8qbot4"]
+
+[ext_resource type="Script" uid="uid://txkdgmh8hped" path="res://mob_timer.gd" id="1_pt5jc"]
+
+[node name="MobTimer" type="Timer"]
+script = ExtResource("1_pt5jc")

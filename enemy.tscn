@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://bwrdv48aut01b"]
+
+[ext_resource type="Script" uid="uid://ceract3skbqke" path="res://enemy.gd" id="1_wujgv"]
+[ext_resource type="Texture2D" uid="uid://cu1yow760sl07" path="res://alteracoes_jogo/kay1.webp" id="2_iifgy"]
+[ext_resource type="Texture2D" uid="uid://b4jiahu3acx2i" path="res://alteracoes_jogo/kay2.webp" id="3_epg4t"]
+[ext_resource type="Texture2D" uid="uid://b6wep64grw0eh" path="res://alteracoes_jogo/kay_tay.webp" id="4_3yqyl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n0g06"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_iifgy")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_epg4t")
+}],
+"loop": true,
+"name": &"swin",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3yqyl")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wujgv"]
+size = Vector2(55.999996, 66)
+
+[node name="Enemy" type="RigidBody2D" groups=["mobs"]]
+position = Vector2(0, -1)
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_wujgv")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2.500001, 0)
+scale = Vector2(0.075581394, 0.04753522)
+sprite_frames = SubResource("SpriteFrames_n0g06")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3.0000005, 1.0000012)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_wujgv")
+debug_color = Color(0.4078414, 0.5459039, 0.72125316, 0.41960785)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+rect = Rect2(-30, -28, 66, 57)
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

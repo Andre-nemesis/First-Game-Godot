@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://btaec58h6ovoy"]
+
+[ext_resource type="Script" uid="uid://bbmb4w27v18iu" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://c1h2fbe2frtcd" path="res://Player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://bwrdv48aut01b" path="res://enemy.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://f2iy5x44sqrl" path="res://enemy2.tscn" id="3_5vw27"]
+[ext_resource type="Texture2D" uid="uid://bd81crhyyux2o" path="res://alteracoes_jogo/eras_tour.webp" id="3_272bh"]
+[ext_resource type="PackedScene" uid="uid://c0f5uekku88hi" path="res://hud.tscn" id="4_1bvp3"]
+[ext_resource type="AudioStream" uid="uid://bw3854uv42ukg" path="res://alteracoes_jogo/shake.mp3" id="6_272bh"]
+[ext_resource type="AudioStream" uid="uid://34piqbsssja1" path="res://alteracoes_jogo/me.mp3" id="7_5vw27"]
+
+[sub_resource type="Curve2D" id="Curve2D_7mycd"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -0.37890625, -6.871826, 0, 0, 0, 0, 479.7141, -1.5571442, 0, 0, 0, 0, 477.94263, 719.583, 0, 0, 0, 0, -0.37890625, 714.2683, 0, 0, 0, 0, -5.6936035, -8.845001, 0, 0, 0, 0, -0.37890625, -6.871826)
+}
+point_count = 6
+
+[node name="main" type="Node"]
+script = ExtResource("1_0xm2m")
+mob_scene = ExtResource("2_h2yge")
+mob2_scne = ExtResource("3_5vw27")
+
+[node name="ErasTour" type="Sprite2D" parent="."]
+position = Vector2(241.96753, 356.95465)
+scale = Vector2(0.5558736, 1.1142766)
+texture = ExtResource("3_272bh")
+
+[node name="player" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(243, 344)
+
+[node name="MobTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(244, 345)
+
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_7mycd")
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+position = Vector2(-0.37890625, -6.871826)
+rotation = 0.011069656
+
+[node name="HUD" parent="." instance=ExtResource("4_1bvp3")]
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_272bh")
+
+[node name="GameOver" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_5vw27")
+
+[connection signal="hit" from="player" to="." method="lose_life"]
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]

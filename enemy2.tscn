@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://f2iy5x44sqrl"]
+
+[ext_resource type="Texture2D" uid="uid://0np2a4u3ig5r" path="res://alteracoes_jogo/kanye-west-e-diddy.jpg" id="1_jfe6r"]
+[ext_resource type="Script" uid="uid://c735h22ahlsoj" path="res://enemy_2.gd" id="1_jugo2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jugo2"]
+size = Vector2(108, 73)
+
+[node name="Enemy2" type="RigidBody2D"]
+script = ExtResource("1_jugo2")
+
+[node name="KanyeWestEDiddy" type="Sprite2D" parent="."]
+position = Vector2(43.499996, 25.999998)
+scale = Vector2(0.08230769, 0.09424084)
+texture = ExtResource("1_jfe6r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(44, 26.5)
+shape = SubResource("RectangleShape2D_jugo2")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+rect = Rect2(-10, -10, 109, 74)
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
