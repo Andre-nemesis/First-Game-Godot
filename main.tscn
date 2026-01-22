@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://btaec58h6ovoy"]
+[gd_scene load_steps=16 format=3 uid="uid://btaec58h6ovoy"]
 
 [ext_resource type="Script" uid="uid://bbmb4w27v18iu" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://c1h2fbe2frtcd" path="res://Player.tscn" id="1_ig7tw"]
@@ -9,6 +9,15 @@
 [ext_resource type="PackedScene" uid="uid://b460jw45wbnna" path="res://powerUp.tscn" id="4_kek77"]
 [ext_resource type="AudioStream" uid="uid://bw3854uv42ukg" path="res://alteracoes_jogo/shake.mp3" id="6_272bh"]
 [ext_resource type="AudioStream" uid="uid://34piqbsssja1" path="res://alteracoes_jogo/me.mp3" id="7_5vw27"]
+[ext_resource type="Script" uid="uid://dwv0onjfoyr2b" path="res://background_lights.gd" id="10_4c57u"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_dg77c"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_ycdy4"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_w48qg"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_vivmo"]
 
 [sub_resource type="Curve2D" id="Curve2D_7mycd"]
 _data = {
@@ -41,6 +50,47 @@ one_shot = true
 
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(244, 345)
+
+[node name="BackgroundLights" type="Node2D" parent="."]
+script = ExtResource("10_4c57u")
+
+[node name="Top" type="PointLight2D" parent="BackgroundLights"]
+position = Vector2(-12754.185, -8432.4375)
+scale = Vector2(22.569025, 170.32568)
+color = Color(1, 0.84313726, 0, 1)
+energy = 2.0
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter = 1
+shadow_filter_smooth = 58.0
+texture = SubResource("CurveTexture_dg77c")
+offset = Vector2(576, 50)
+
+[node name="Bottom" type="PointLight2D" parent="BackgroundLights"]
+position = Vector2(-337.18652, -20319.107)
+scale = Vector2(1, 35.52712)
+color = Color(0.09402726, 0.76934326, 0.56049395, 1)
+energy = 2.0
+texture = SubResource("CurveTexture_ycdy4")
+offset = Vector2(576, 598)
+texture_scale = 8.63
+
+[node name="LeftLight" type="PointLight2D" parent="BackgroundLights"]
+position = Vector2(44.381054, 95.54834)
+rotation = -0.45204028
+scale = Vector2(1, 50.64794)
+color = Color(0.16470589, 1, 1, 1)
+energy = 2.0
+texture = SubResource("CurveTexture_w48qg")
+texture_scale = 6.21
+
+[node name="RightLight" type="PointLight2D" parent="BackgroundLights"]
+position = Vector2(430.5614, 98.562225)
+rotation = 0.45204028
+scale = Vector2(1.1621095, 83.99977)
+color = Color(1, 0.14117648, 1, 1)
+energy = 2.0
+texture = SubResource("CurveTexture_vivmo")
+texture_scale = 3.78
 
 [node name="MobPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_7mycd")
