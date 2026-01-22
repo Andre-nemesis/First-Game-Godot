@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b460jw45wbnna"]
+
+[ext_resource type="Texture2D" uid="uid://dlthibuoirlov" path="res://alteracoes_jogo/mic.webp" id="1_nd2t6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i8y25"]
+size = Vector2(52.164005, 67.43151)
+
+[node name="PowerUp" type="Area2D"]
+position = Vector2(88.2123, 40.289265)
+
+[node name="Mic" type="Sprite2D" parent="."]
+position = Vector2(2.499998, 7)
+scale = Vector2(0.27142859, 0.24000001)
+texture = ExtResource("1_nd2t6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3.457365, 5.9773855)
+shape = SubResource("RectangleShape2D_i8y25")

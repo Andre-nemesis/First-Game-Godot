@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://btaec58h6ovoy"]
+[gd_scene load_steps=11 format=3 uid="uid://btaec58h6ovoy"]
 
 [ext_resource type="Script" uid="uid://bbmb4w27v18iu" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://c1h2fbe2frtcd" path="res://Player.tscn" id="1_ig7tw"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://f2iy5x44sqrl" path="res://enemy2.tscn" id="3_5vw27"]
 [ext_resource type="Texture2D" uid="uid://bd81crhyyux2o" path="res://alteracoes_jogo/eras_tour.webp" id="3_272bh"]
 [ext_resource type="PackedScene" uid="uid://c0f5uekku88hi" path="res://hud.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://b460jw45wbnna" path="res://powerUp.tscn" id="4_kek77"]
 [ext_resource type="AudioStream" uid="uid://bw3854uv42ukg" path="res://alteracoes_jogo/shake.mp3" id="6_272bh"]
 [ext_resource type="AudioStream" uid="uid://34piqbsssja1" path="res://alteracoes_jogo/me.mp3" id="7_5vw27"]
 
@@ -19,6 +20,7 @@ point_count = 6
 script = ExtResource("1_0xm2m")
 mob_scene = ExtResource("2_h2yge")
 mob2_scne = ExtResource("3_5vw27")
+power_up = ExtResource("4_kek77")
 
 [node name="ErasTour" type="Sprite2D" parent="."]
 position = Vector2(241.96753, 356.95465)

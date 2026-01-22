@@ -2,6 +2,7 @@ extends Node
 
 @export var mob_scene: PackedScene
 @export var mob2_scne: PackedScene
+@export var power_up: PackedScene
 
 var score
 var elapsed_time: float = 0.0
@@ -57,27 +58,40 @@ func new_game() -> void:
 	$HUD.update_life(lifes)
 	get_tree().call_group("mobs", "queue_free")
 	get_tree().call_group("mobs2", "queue_free")
+	get_tree().call_group("powerup", "queue_free")
 	$player.start($StartPosition.position)
 	
 func _on_mob_timer_timeout() -> void:
-	var is_heavy: bool = randf() < 0.1
-	var mob_scene_to_use = mob2_scne if is_heavy else mob_scene
-	
-	var mob = mob_scene_to_use.instantiate()
-	var mob_spawn_location = $MobPath/MobSpawnLocation
-	mob_spawn_location.progress_ratio = randf()
-	mob.position = mob_spawn_location.position
-	var direction = mob_spawn_location.rotation + PI / 2
-	direction += randf_range(-PI / 4, PI / 4)
-	mob.rotation = direction
-	
-	var base_velocity = 75.0 if is_heavy else randf_range(150.0, 250.0)
-	var velocity = Vector2(base_velocity, 0.0)
-	mob.linear_velocity = velocity.rotated(direction)
-	
-	add_child(mob)
-	
-	if is_heavy:
+	var roll = randf()
+	if roll < 0.05:
+		var powerUp = power_up.instantiate()
+		var mob_spawn_location = $MobPath/MobSpawnLocation
+		mob_spawn_location.progress_ratio = randf()
+		powerUp.position = mob_spawn_location.position
+		add_child(powerUp)
+		powerUp.add_to_group("powerup")
+	elif roll < 0.15:
+		var mob = mob2_scne.instantiate()
+		var mob_spawn_location = $MobPath/MobSpawnLocation
+		mob_spawn_location.progress_ratio = randf()
+		mob.position = mob_spawn_location.position
+		var direction = mob_spawn_location.rotation + PI / 2
+		direction += randf_range(-PI / 4, PI / 4)
+		mob.rotation = direction
+		var velocity = Vector2(75.0, 0.0)
+		mob.linear_velocity = velocity.rotated(direction)
+		add_child(mob)
 		mob.add_to_group("mobs2")
 	else:
+		var mob = mob_scene.instantiate()
+		var mob_spawn_location = $MobPath/MobSpawnLocation
+		mob_spawn_location.progress_ratio = randf()
+		mob.position = mob_spawn_location.position
+		var direction = mob_spawn_location.rotation + PI / 2
+		direction += randf_range(-PI / 4, PI / 4)
+		mob.rotation = direction
+		var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
+		mob.linear_velocity = velocity.rotated(direction)
+		add_child(mob)
 		mob.add_to_group("mobs")
+	
